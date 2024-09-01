@@ -412,9 +412,48 @@ export default function GamePage() {
             ],
         },
         5: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kamu tahu gak, situs kayak apa yang harus sebisa mungkin kamu hindari?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kamu tahu gak, situs kayak apa yang harus sebisa mungkin kamu hindari?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kamu tahu gak, situs kayak apa yang harus sebisa mungkin kamu hindari?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kamu tahu gak, situs kayak apa yang harus sebisa mungkin kamu hindari?",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            correct: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Benar, pelaku judi online bisa dikenakan pidana penjara hingga bertahun-tahun serta denda yang cukup besar. Penyitaan aset serta peringatan atau pembatasan akses juga bisa saja terjadi, sih. Pokoknya tergantung keputusan pengadilan.",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgNarasiUjan,
+                },
+            ],
         },
         6: {
             initial: [/* Array of dialogue objects for level 2 */],
