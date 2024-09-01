@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { signOut } from '@/auth'
+// import { signOut } from '@/auth'
 import { redirect } from 'next/navigation'
 
 export interface UserMenuProps {
@@ -40,7 +40,7 @@ export function UserMenu({ user }: UserMenuProps) {
           <form
             action={async () => {
               'use server'
-              await signOut()
+              // await signOut()
               redirect('/')
             }}
           >
