@@ -8,6 +8,7 @@ import PopupResetProgress from '@/components/new/popup-reset-progress';
 import { useRouter } from 'next/navigation';
 import Back from '../../public/back.svg'
 import BackWhite from '../../public/back-white.svg'
+import LevelButtons from '@/components/new/level-button';
 
 const customFont = Pixelify_Sans({
     weight: ['400'],
@@ -90,7 +91,8 @@ export default function LevelPage() {
 
                 </div>
 
-                <div className="absolute top-6 right-6">
+                {/* Reset progress button */}
+                {/* <div className="absolute top-6 right-6">
                     <div className="flex flex-row items-center cursor-pointer"
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
@@ -105,19 +107,9 @@ export default function LevelPage() {
                         />
                         <div className={`ml-2 text-xl text-[#9177B7] hover:text-white ${isHovered ? 'text-white' : 'text-[#9177B7]'}`}>Reset Progress</div>
                     </div>
-                </div>
-                <div className="mt-12 grid grid-cols-5 gap-y-12 gap-x-32">
-                    {Array.from({ length: totalLevels }, (_, i) => (
-                        <button
-                            key={i}
-                            className={`w-28 h-28 text-5xl bg-white text-[#9177B7] rounded-md flex items-center justify-center ${i + 1 <= unlockedLevels ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
-                                }`}
-                            onClick={() => handleLevelClick(i + 1)}
-                        >
-                            {i + 1}
-                        </button>
-                    ))}
-                </div>
+                </div> */}
+                <LevelButtons totalLevels={totalLevels} unlockedLevels={unlockedLevels} />
+
             </div>
             <PopupResetProgress
                 isOpen={isPopupOpen}

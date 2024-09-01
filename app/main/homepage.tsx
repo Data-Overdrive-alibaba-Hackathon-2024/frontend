@@ -52,10 +52,10 @@ export default function HomePage() {
                         <p className="text-3xl">Permainan</p>
                         <p className="text-xl text-[#9177B7]">Explore The Story</p>
                     </Link>
-                    <Link href="/chatbot" className="flex flex-col text-center cursor-pointer">
+                    {/* <Link href="/chatbot" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">Chatbot</p>
                         <p className="text-xl text-[#9177B7]">Tanya AI</p>
-                    </Link>
+                    </Link> */}
                     <Link href="/about" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">About Us</p>
                         <p className="text-xl text-[#9177B7]">Get to know us</p>

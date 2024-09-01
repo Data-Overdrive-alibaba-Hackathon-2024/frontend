@@ -8,7 +8,7 @@ import Nindy from '../../../public/npc-nindy.png'
 import QuizQuestion from '@/components/new/quiz-message';
 import BgClassroom from '../../../public/backgrounds/bg-narasi-classroom.png'
 import { StaticImageData } from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { fetchNextLevel } from './action';
 
 type QuizQuestionType = {
@@ -36,6 +36,9 @@ type DialogueSets = {
 }
 
 export default function GamePage() {
+    const params = useParams();
+    const id = Array.isArray(params.id) ? parseInt(params.id[0], 10) : parseInt(params.id, 10);
+
     const router = useRouter();
     const [showDialogue, setShowDialogue] = useState(true);
     const [showQuiz, setShowQuiz] = useState(false);
@@ -47,139 +50,276 @@ export default function GamePage() {
         setShowQuiz(false);
     }, []);
 
-    const dialogueSets: DialogueSets = {
-        initial: [
-            {
-                text: "Kabupaten B, 2024. Daerah yang cukup ramai sebagai sentra pemerintahan daerah. ",
-                bg: BgClassroom,
-            },
-            {
-                text: "Tempat mimpi-mimpi diterbangkan setiap pagi dan diistirahatkan ketika mentari tenggelam. ",
-                bg: BgClassroom,
-            },
-            {
-                text: "Terlihat kaki-kaki yang melangkah dengan semangat memenuhi jalanan dan angkutan perkotaan pagi itu.",
-                bg: BgClassroom,
-            },
-            {
-                text: "Di antaranya, seragam-seragam putih merah, putih biru, dan putih abu berbaur dengan keramaian. Seragam yang menandakan sebuah mimpi besar dari perjalanan panjang akan dimulai.",
-                bg: BgClassroom,
-            },
-            {
-                text: "Begitu pun yang terjadi di ruang kelas sebuah sekolah menengah pertama.",
-                bg: BgClassroom,
-            },
-            {
-                text: "Pagi itu, ruang kelas ramai dengan bisik-bisik kecil. Sementara, seorang siswa dengan wajah cerah melangkahkan kaki, masuk ke kelas tempat ia singgah sehari-hari.",
-                bg: BgClassroom,
-            },
-            {
-                name: "Raka",
-                image: Raka,
-                text: "Lagi pada gosipin apa sih?",
-                bg: BgClassroom,
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Rumahnya Tobi kemarin malam kedatangan polisi, Rak!",
-                bg: BgClassroom,
-            },
-            {
-                name: "Raka",
-                image: Raka,
-                text: "Kok bisa?",
-                bg: BgClassroom,
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Katanya Ayahnya Tobi dicurigain main judi online.",
-                bg: BgClassroom,
-            },
-            {
-                name: "Raka",
-                image: Raka,
-                text: "Apaan tuh judi online?",
-                bg: BgClassroom,
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Hmm, main game online mungkin? Kayak kita pas main mobile legends.",
-                bg: BgClassroom,
-            },
-            {
-                name: "Raka",
-                image: Raka,
-                text: "Masa sih? Berarti kita bisa ditangkep juga dong kalo gitu?",
-                bg: BgClassroom,
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Tanya Nindy aja deh! Kayaknya dia lebih tau. Orang tua dia kan kerja di bidang hukum.",
-                bg: BgClassroom,
-            },
-            {
-                name: "Nindy",
-                image: Nindy,
-                text: "Apaan nih nyebut-nyebut nama aku?",
-                bg: BgClassroom,
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Eh Nin, si Raka nanya, emang bedanya judi online sama game online yang biasa kita mainin tuh apa sih?",
-                bg: BgClassroom,
-            },
-            {
-                name: "Nindy",
-                image: Nindy,
-                text: "Oalaah, pertanyaan bagus! Aku kasih petunjuk nih yaa.",
-                bg: BgClassroom,
-            },
-        ],
-        tryAgain: [
-            {
-                name: "Nindy",
-                image: Nindy,
-                text: "Kurang tepat, nih...",
-                bg: BgClassroom,
-            }
-        ],
-        correct: [
-            {
-                name: "Nindy",
-                image: Nindy,
-                text: "Benar, Ketika bermain game online, kita mengharapkan hiburan atau tantangan, sedangkan dari judi online kita berharap memperoleh keuntungan finansial. ",
-                bg: BgClassroom
-            },
-            {
-                name: "Nindy",
-                image: Nindy,
-                text: "Selain itu, ketika main game online biasa, kita perlu keterampilan dalam bermain, kan? Nah, dalam judi online, kita gak perlu jago, cuma perlu hoki.",
-                bg: BgClassroom
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Bukannya malah bagus, ya, kalo gitu kita jadi gampang dapet uang dong!",
-                bg: BgClassroom
-            },
-            {
-                name: "Nindy",
-                image: Nindy,
-                text: "Enggak gitu juga, Dhi. Kalo di judi online, pemain wajib pasang taruhan. Kata ayahku, kita bisa rugi hingga miliaran, tauu.",
-                bg: BgClassroom
-            },
-            {
-                name: "Ardhi",
-                image: Ardhi,
-                text: "Waduh",
-                bg: BgClassroom
-            },
-        ]
+    const dialogueSets: { [key: number]: DialogueSets } = {
+        1: {
+            initial: [
+                {
+                    text: "Kabupaten B, 2024. Daerah yang cukup ramai sebagai sentra pemerintahan daerah. ",
+                    bg: BgClassroom,
+                },
+                {
+                    text: "Tempat mimpi-mimpi diterbangkan setiap pagi dan diistirahatkan ketika mentari tenggelam. ",
+                    bg: BgClassroom,
+                },
+                {
+                    text: "Terlihat kaki-kaki yang melangkah dengan semangat memenuhi jalanan dan angkutan perkotaan pagi itu.",
+                    bg: BgClassroom,
+                },
+                {
+                    text: "Di antaranya, seragam-seragam putih merah, putih biru, dan putih abu berbaur dengan keramaian. Seragam yang menandakan sebuah mimpi besar dari perjalanan panjang akan dimulai.",
+                    bg: BgClassroom,
+                },
+                {
+                    text: "Begitu pun yang terjadi di ruang kelas sebuah sekolah menengah pertama.",
+                    bg: BgClassroom,
+                },
+                {
+                    text: "Pagi itu, ruang kelas ramai dengan bisik-bisik kecil. Sementara, seorang siswa dengan wajah cerah melangkahkan kaki, masuk ke kelas tempat ia singgah sehari-hari.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Lagi pada gosipin apa sih?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Rumahnya Tobi kemarin malam kedatangan polisi, Rak!",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Kok bisa?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Katanya Ayahnya Tobi dicurigain main judi online.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Apaan tuh judi online?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Hmm, main game online mungkin? Kayak kita pas main mobile legends.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Masa sih? Berarti kita bisa ditangkep juga dong kalo gitu?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Tanya Nindy aja deh! Kayaknya dia lebih tau. Orang tua dia kan kerja di bidang hukum.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Apaan nih nyebut-nyebut nama aku?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Eh Nin, si Raka nanya, emang bedanya judi online sama game online yang biasa kita mainin tuh apa sih?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Oalaah, pertanyaan bagus! Aku kasih petunjuk nih yaa.",
+                    bg: BgClassroom,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Kurang tepat, nih...",
+                    bg: BgClassroom,
+                }
+            ],
+            correct: [
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Benar, Ketika bermain game online, kita mengharapkan hiburan atau tantangan, sedangkan dari judi online kita berharap memperoleh keuntungan finansial. ",
+                    bg: BgClassroom
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Selain itu, ketika main game online biasa, kita perlu keterampilan dalam bermain, kan? Nah, dalam judi online, kita gak perlu jago, cuma perlu hoki.",
+                    bg: BgClassroom
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Bukannya malah bagus, ya, kalo gitu kita jadi gampang dapet uang dong!",
+                    bg: BgClassroom
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Enggak gitu juga, Dhi. Kalo di judi online, pemain wajib pasang taruhan. Kata ayahku, kita bisa rugi hingga miliaran, tauu.",
+                    bg: BgClassroom
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Waduh",
+                    bg: BgClassroom
+                },
+            ]
+        },
+        2: {
+            initial: [
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Nin, tadi kata kamu main judi online gak harus jago kan ya?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Iyaa...",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Eh, emang kenapa Rak kok nanya itu? Jangan coba-coba loh ya! Kita masih kecil.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Ardhi",
+                    image: Ardhi,
+                    text: "Berarti kalo udah besar nanti boleh?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Sama aja gak boleh, sih…",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Nin, kenapa semakin sering seseorang main judi online gak bikin dia makin besar kesempatan menangnya?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Kok kamu penasaran banget?",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Menarik aja sih menurutku.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Oke! Sebelum aku jawab, coba kamu tebak dulu dari pilihan yang kukasih, kenapa kemenangan bagi orang yang bermain judi online itu gak pernah pasti.",
+                    bg: BgClassroom,
+                },
+            ],
+            correct: [
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Benar, judi itu tentang peluang. Misalnya nih, ramalan cuaca mengatakan kemungkinan cuaca besok cerah adalah 50%, artinya ada peluang 50% kalau besok bakal hujan. Semakin besar angka persentasenya,  maka semakin mungkin hal tersebut kejadian.",
+                    bg: BgClassroom,
+                },
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Berlaku juga sama judi. Bedanya, karena bandar judi itu butuh keuntungan dan gak mungkin dia mau ambil keuntungan yang kecil-kecil aja, maka peluang seseorang untuk menang dibuat semakin kecil.",
+                    bg: BgClassroom,
+                }, {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Logikanya, kalau bandar dan pemenang bisa dapet keuntungan yang besar, berarti harus ada yang dikorbankan, kan? Nah, peluang menang untuk penjudi lain itulah yang dikurangi, jadi kesempatan untuk menang itu keciiiiil banget.",
+                    bg: BgClassroom,
+                }, {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Ooh gitu?",
+                    bg: BgClassroom,
+                }, {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Yup! Nah kalo udah cukup paham, jangan coba-coba deh pokoknya. Aku laper, mau ke kantin dulu, nanti tanya lanjut aja ke emak bapakmu Rak kalo masih penasaran.",
+                    bg: BgClassroom,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Nindy",
+                    image: Nindy,
+                    text: "Coba lagi",
+                    bg: BgClassroom,
+                },
+            ],
+        },
+        3: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        4: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        5: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        6: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        7: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        8: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        9: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
+        10: {
+            initial: [/* Array of dialogue objects for level 2 */],
+            correct: [/* Array of correct dialogue objects for level 2 */],
+            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+        },
     };
 
     useEffect(() => {
@@ -206,6 +346,11 @@ export default function GamePage() {
 
         fetchQuizQuestion();
     }, []);
+
+    // const dialogues = dialogueSets[id] ? dialogueSets[id][currentDialogueSet] : [];
+    const dialogues = Number.isInteger(id) && dialogueSets[id]
+        ? dialogueSets[id][currentDialogueSet]
+        : [];
 
     const handleDialogueEnd = () => {
 
@@ -250,7 +395,7 @@ export default function GamePage() {
         <div className="game-container">
             {showDialogue && (
                 <DialogueBox
-                    dialogues={dialogueSets[currentDialogueSet]}
+                    dialogues={dialogues}
                     onDialogueEnd={handleDialogueEnd}
                 />
             )}
