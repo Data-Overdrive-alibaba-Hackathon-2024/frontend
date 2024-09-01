@@ -22,7 +22,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({ question, options, onAnswer
 
     const handleAnswer = async (answer: string) => {
         setSelectedAnswer(answer);
-        await onAnswer(answer);
+        onAnswer(answer);
     };
 
     return (

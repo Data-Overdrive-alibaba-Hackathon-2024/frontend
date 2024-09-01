@@ -50,7 +50,7 @@ export default function HomePage() {
                 <div className="absolute flex justify-between items-center px-4 w-full max-w-screen-lg mx-auto mt-[50vh]">
                     <Link href="/level" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">Permainan</p>
-                        <p className="text-xl text-[#9177B7]">Progress: 5/10</p>
+                        <p className="text-xl text-[#9177B7]">Explore The Story</p>
                     </Link>
                     <Link href="/chatbot" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">Chatbot</p>

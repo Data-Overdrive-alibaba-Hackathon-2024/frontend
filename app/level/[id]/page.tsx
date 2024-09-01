@@ -8,8 +8,11 @@ import Nindy from '../../../public/npc-nindy.png'
 import QuizQuestion from '@/components/new/quiz-message';
 import BgClassroom from '../../../public/backgrounds/bg-narasi-classroom.png'
 import { StaticImageData } from 'next/image';
+import { useRouter } from 'next/navigation';
+import { fetchNextLevel } from './action';
 
 type QuizQuestionType = {
+    id: string;
     question: string;
     level: number,
     option_1: string,
@@ -33,10 +36,16 @@ type DialogueSets = {
 }
 
 export default function GamePage() {
+    const router = useRouter();
     const [showDialogue, setShowDialogue] = useState(true);
     const [showQuiz, setShowQuiz] = useState(false);
     const [currentDialogueSet, setCurrentDialogueSet] = useState<keyof DialogueSets>('initial');
     const [quizQuestion, setQuizQuestion] = useState<QuizQuestionType | null>(null);
+
+    useEffect(() => {
+        setShowDialogue(true);
+        setShowQuiz(false);
+    }, []);
 
     const dialogueSets: DialogueSets = {
         initial: [
@@ -133,33 +142,45 @@ export default function GamePage() {
         ],
         tryAgain: [
             {
-                text: "The adventurer ponders for a moment, realizing the answer might not be correct..."
-            },
-            {
-                name: "Village Elder",
+                name: "Nindy",
                 image: Nindy,
-                text: "That's not quite right. Try again!"
+                text: "Kurang tepat, nih...",
+                bg: BgClassroom,
             }
         ],
         correct: [
             {
-                name: "Village Elder",
+                name: "Nindy",
                 image: Nindy,
-                text: "Excellent! You've understood the situation correctly."
-            }
+                text: "Benar, Ketika bermain game online, kita mengharapkan hiburan atau tantangan, sedangkan dari judi online kita berharap memperoleh keuntungan finansial. ",
+                bg: BgClassroom
+            },
+            {
+                name: "Nindy",
+                image: Nindy,
+                text: "Selain itu, ketika main game online biasa, kita perlu keterampilan dalam bermain, kan? Nah, dalam judi online, kita gak perlu jago, cuma perlu hoki.",
+                bg: BgClassroom
+            },
+            {
+                name: "Ardhi",
+                image: Ardhi,
+                text: "Bukannya malah bagus, ya, kalo gitu kita jadi gampang dapet uang dong!",
+                bg: BgClassroom
+            },
+            {
+                name: "Nindy",
+                image: Nindy,
+                text: "Enggak gitu juga, Dhi. Kalo di judi online, pemain wajib pasang taruhan. Kata ayahku, kita bisa rugi hingga miliaran, tauu.",
+                bg: BgClassroom
+            },
+            {
+                name: "Ardhi",
+                image: Ardhi,
+                text: "Waduh",
+                bg: BgClassroom
+            },
         ]
     };
-
-    // const quizQuestion = {
-    //     question: "Misalnya, kamu melihat iklan judi online yang menjanjikan hadiah besar dengan taruhan kecil. Apa yang sebaiknya dipahami tentang tawaran ini?",
-    //     options: [
-    //         "Semua orang bisa menang besar.",
-    //         "Iklan ini pasti benar.",
-    //         "Kemenangan besar jarang terjadi dan lebih banyak yang kalah.",
-    //         "El panadero con el pan"
-    //     ],
-    //     correctAnswer: "Kemenangan besar jarang terjadi dan lebih banyak yang kalah."
-    // };
 
     useEffect(() => {
         const fetchQuizQuestion = async () => {
@@ -177,8 +198,7 @@ export default function GamePage() {
                     }
                 });
                 const data = await response.json();
-                console.log("masuk sini, data: ", data)
-                setQuizQuestion(data);
+                setQuizQuestion(data.data);
             } catch (error) {
                 console.error('Error fetching quiz question:', error);
             }
@@ -188,42 +208,50 @@ export default function GamePage() {
     }, []);
 
     const handleDialogueEnd = () => {
-        setShowDialogue(false);
-        setShowQuiz(true);
+
+        if (currentDialogueSet === 'initial' || currentDialogueSet === 'tryAgain') {
+            setShowQuiz(true);
+            setShowDialogue(false);
+        } else if (currentDialogueSet === 'correct') {
+            // Handle what happens after showing the correct dialogue
+            // Example: Move to the next question, or show a completion message, etc.
+            setShowQuiz(false); // Assuming you might want to hide the quiz here
+            setShowDialogue(false); // Assuming you might want to hide the dialogue here
+
+            fetchNextLevel(quizQuestion!.id)
+            router.push('/level')
+        }
     };
 
-    const options = [
-        quizQuestion?.option_1,
-        quizQuestion?.option_2,
-        quizQuestion?.option_3,
-        quizQuestion?.option_4,
-    ];
+    const handleQuizAnswer = (selectedAnswer: string) => {
+        if (!quizQuestion) return;
 
-    const handleQuizAnswer = (answer: string) => {
-        if (!quizQuestion) {
-            return;
-        }
+        // Mapping the 'correct_answer' letter to the corresponding option
+        const correctAnswer = [
+            quizQuestion.option_1,
+            quizQuestion.option_2,
+            quizQuestion.option_3,
+            quizQuestion.option_4
+        ].find(option => option.startsWith(quizQuestion.correct_answer + "."));
 
-        const correctOption = quizQuestion[`option_${quizQuestion.correct_answer.toLowerCase()}` as keyof QuizQuestionType];
-
-        if (answer === correctOption) {
-            setShowQuiz(false);
+        console.log("selected: ", selectedAnswer)
+        console.log("correct answer: ", correctAnswer)
+        if (selectedAnswer === correctAnswer) {
             setCurrentDialogueSet('correct');
-            setShowDialogue(true);
         } else {
-            setShowQuiz(false);
             setCurrentDialogueSet('tryAgain');
-            setShowDialogue(true);
         }
+
+        setShowDialogue(true);
+        setShowQuiz(false);
     };
 
     return (
         <div className="game-container">
-            {/* Your game content goes here */}
             {showDialogue && (
                 <DialogueBox
                     dialogues={dialogueSets[currentDialogueSet]}
-                    onDialogueEnd={currentDialogueSet === 'initial' ? handleDialogueEnd : () => setShowQuiz(true)}
+                    onDialogueEnd={handleDialogueEnd}
                 />
             )}
             {showQuiz && quizQuestion && (
