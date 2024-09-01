@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react';
 import DialogueBox from '@/components/new/message';
 import Ardhi from '../../../public/npc-ardhi.png'
 import Raka from '../../../public/npc-raka.png'
+import Raka2 from '../../../public/npc-raka2.png'
 import Nindy from '../../../public/npc-nindy.png'
+import Kakak from '../../../public/npc-kakak.png'
 import QuizQuestion from '@/components/new/quiz-message';
 import BgClassroom from '../../../public/backgrounds/bg-narasi-classroom.png'
+import BgNarasiUjan from '../../../public/backgrounds/bg-narasiujan.png'
 import { StaticImageData } from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { fetchNextLevel } from './action';
@@ -281,14 +284,132 @@ export default function GamePage() {
             ],
         },
         3: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    text: "Malam hari di pinggiran kota, mulai turun gerimis rintik-rintik. Akhir-akhir ini langit cukup sering memuntahkan isinya.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    text: "Mungkin ia kecewa melihat carut-marut kota sibuk ini?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    text: "Atau… ia memang tahu saja bahwa orang-orang yang ia naungi butuh penyegaran setelah seharian lelah bekerja.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    text: "Waktu yang tepat untuk berkumpul sambil menyantap makan malam yang hangat di meja.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Kak, kamu pernah main judi online?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Ya enggak lah! Dosa tau taruhan begitu. Emang kenapa?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Kalo yang ngadain judi online itu… gimana mereka bisa dapet untung sih kak? Kata temen kelasku, mereka main peluang gitu, ya?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Betul! Secara sederhana, judi online itu mirip-mirip permainan mesin capit. Kamu tau kan, mesin yang biasa ada di arkade? Isinya hadiah, bisa berupa boneka sampai barang berharga.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Mesin arkade itu diatur agar hanya membayar hadiah setelah sejumlah permainan tertentu telah dimainkan. Kadang memang ada orang yang beruntung, tapi coba kamu hitung berapa perbandingan orang yang dapat hadiah dibanding yang nggak dapat, deh.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Berdasarkan penjelasan aku tadi, kamu bisa simpulin gak kira-kira gimana taktik judi online supaya dapat keuntungan?",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            correct: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Benar, kamu tuh pinter, Rak. Aku percaya kok kamu bisa memperkirakan mana yang baik dan enggak buat kamu",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kurang tepat nih, coba lagi.",
+                    bg: BgNarasiUjan,
+                },
+            ],
         },
         4: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Ngomong-ngomong, Rak, kamu tahu gak gimana seseorang bisa kena jerat judi online?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Awalnya bisa jadi coba-coba, Rak. Kayak nyari peruntungan gitu. Bisa juga lagi iseng berselancar di internet, terus ketemu tautan link yang tanpa ia sadari merujuk ke situs bermain judi.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Banyak cara untuk menipu orang awam supaya masuk ke lingkaran bisnis judi, Rak. Sekalinya masuk bakal susah keluar lagi. Makanya, kita sebagai masyarakat sebisa mungkin mengedukasi diri sendiri dan orang lain tentang hal ini.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kamu tahu gak, situs kayak apa yang harus sebisa mungkin kamu hindari?",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            correct: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Sebetulnya, banyak kok ciri-ciri situs yang mengindikasikan kalau ia berbahaya. Contohnya, situs yang memasang banyak iklan tentang bonus yang menggiurkan, banyak pop-up, tampilannya tidak konsisten, bahkan yang paling berbahaya adalah kalau situs tersebut sudah minta data-data pribadi kamu.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Raka",
+                    image: Raka,
+                    text: "Tapi Kak, kan banyak juga situs legal yang meminta kita memasukkan data diri kita?",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Yap. Tetap aja, kamu harus hati-hati dengan situs yang meminta data pribadimu. Kalau ragu, saranku selalu pastikan dulu ke relasimu apakah situs tersebut aman atau tidak.",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgNarasiUjan,
+                },
+            ],
         },
         5: {
             initial: [/* Array of dialogue objects for level 2 */],

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import ResetProgress from '../../public/reset-progress.svg'
 import ResetProgressWhite from '../../public/reset-progress-white.svg'
 import PopupResetProgress from '@/components/new/popup-reset-progress';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import Back from '../../public/back.svg'
 import BackWhite from '../../public/back-white.svg'
 import LevelButtons from '@/components/new/level-button';
@@ -78,7 +78,7 @@ export default function LevelPage() {
                     <div className="ml-3 cursor-pointer transition duration-300"
                         onMouseEnter={() => setIsHovered2(true)}
                         onMouseLeave={() => setIsHovered2(false)}
-                        onClick={router.back}
+                        onClick={() => router.push('/main')}
                     >
                         <Image
                             height={20}
