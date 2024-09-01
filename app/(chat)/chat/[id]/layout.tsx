@@ -1,4 +1,4 @@
-import { Header } from '@/components/header'
+// import { Header } from '@/components/header'
 import { ChatbotHeader } from '@/components/new/chatbot-header'
 import { SidebarDesktop } from '@/components/sidebar-desktop'
 
