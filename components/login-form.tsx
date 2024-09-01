@@ -33,7 +33,8 @@ export default function LoginForm() {
       if (result.type === 'error') {
         toast.error(getMessageFromCode(result.resultCode))
       } else {
-        toast.success(getMessageFromCode(result.resultCode))
+        window.localStorage.setItem('token', result.token || ''); // Store token on client side with a default value of ''
+        toast.success("Login success")
         router.push('/main')
       }
     }

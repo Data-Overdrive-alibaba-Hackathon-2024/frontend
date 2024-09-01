@@ -1,15 +1,15 @@
-import { auth } from "@/auth"
+// import { auth } from "@/auth"
+'use client'
 import { Session } from "next-auth"
 import { redirect } from "next/navigation"
 import HomePage from "./homepage"
+import useAuth from "@/hooks/useAuth"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 
-// page ini cuma buat checking session
-export default async function MainPage() {
-    const session = await auth() as Session
+export default function MainPage() {
 
-    if (!session) {
-        redirect('/')  // Redirect to login if there's no session
-    }
+    useAuth()
 
     return <HomePage />
 }

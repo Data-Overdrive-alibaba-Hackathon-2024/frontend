@@ -1,13 +1,15 @@
+'use client'
+
 import localFont from 'next/font/local'
-import { auth } from '@/auth'
+// import { auth } from '@/auth'
 import { Session } from '@/lib/types'
 import { redirect } from 'next/navigation'
 import { Pixelify_Sans } from 'next/font/google'
 import Link from 'next/link'
 
-export const metadata = {
-  title: 'Awas Korupsi Educational Game'
-}
+// export const metadata = {
+//   title: 'Awas Korupsi Educational Game'
+// }
 
 const customFont = Pixelify_Sans({
   weight: ['400'],
@@ -15,12 +17,12 @@ const customFont = Pixelify_Sans({
   display: 'swap',
 })
 
-export default async function IndexPage() {
-  const session = (await auth()) as Session
+export default function IndexPage() {
+  // const session = (await auth()) as Session
 
-  if (session) {
-    redirect('/main')
-  }
+  // if (session) {
+  //   redirect('/main')
+  // }
 
   return (
     <div className='flex flex-col bg-[#1C0043] min-h-screen items-center text-white'>

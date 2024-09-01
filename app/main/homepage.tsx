@@ -5,9 +5,10 @@ import Image from "next/image"
 import Logout from '../../public/logout.svg'
 import LogoutWhite from '../../public/logout-white.svg'
 import { useState } from "react"
-import { handleSignOut } from "./actions"
+// import { handleSignOut } from "./actions"
 import Popup from "@/components/new/popup"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const customFont = Pixelify_Sans({
     weight: ['400'],
@@ -18,10 +19,12 @@ const customFont = Pixelify_Sans({
 export default function HomePage() {
     const [isHovered, setIsHovered] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+    const router = useRouter()
 
     const handleSignOutPopup = () => {
         setIsPopupOpen(false);
-        handleSignOut()
+        localStorage.removeItem('token');
+        router.push('/')
     };
 
     return (
@@ -43,12 +46,12 @@ export default function HomePage() {
                         <div className={`ml-2 text-2xl text-[#9177B7] hover:text-white ${isHovered ? 'text-white' : 'text-[#9177B7]'}`}>Keluar</div>
                     </div>
                 </div>
-                <h1 className="text-8xl font-bold tracking-widest">Awas Korupsi!</h1>
+                <h1 className="text-8xl font-bold tracking-widest">Awas Judol!</h1>
                 <div className="absolute flex justify-between items-center px-4 w-full max-w-screen-lg mx-auto mt-[50vh]">
-                    <div className="flex flex-col text-center cursor-pointer">
+                    <Link href="/level" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">Permainan</p>
                         <p className="text-xl text-[#9177B7]">Progress: 5/10</p>
-                    </div>
+                    </Link>
                     <Link href="/chatbot" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">Chatbot</p>
                         <p className="text-xl text-[#9177B7]">Tanya AI</p>

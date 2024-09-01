@@ -31,10 +31,11 @@ export default function SignupForm() {
   useEffect(() => {
     if (result) {
       if (result.type === 'error') {
-        toast.error(getMessageFromCode(result.resultCode))
+        // toast.error(getMessageFromCode(result.resultCode))
+        toast.error("Register Failed")
       } else {
-        toast.success(getMessageFromCode(result.resultCode))
-        router.refresh()
+        toast.success("Register Success, now you can login")
+        router.push('/login')
       }
     }
   }, [result, router])

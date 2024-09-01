@@ -1,0 +1,119 @@
+'use client'
+import React, { useState, useEffect } from 'react';
+import { fetchUnlockedLevels } from './actions';
+import { Pixelify_Sans } from 'next/font/google';
+import Image from 'next/image';
+import ResetProgress from '../../public/reset-progress.svg'
+import ResetProgressWhite from '../../public/reset-progress-white.svg'
+import PopupResetProgress from '@/components/new/popup-reset-progress';
+import { useRouter } from 'next/navigation';
+import Back from '../../public/back.svg'
+import BackWhite from '../../public/back-white.svg'
+
+const customFont = Pixelify_Sans({
+    weight: ['400'],
+    subsets: ['latin'],
+    display: 'swap',
+})
+
+export default function LevelPage() {
+    const router = useRouter()
+
+    const [isHovered, setIsHovered] = useState(false);
+    const [isHovered2, setIsHovered2] = useState(false);
+    const totalLevels = 10;
+    const [unlockedLevels, setUnlockedLevels] = useState<number>(1); // Default to 1 until data is fetched
+    const userId = '123'; // Example user ID, replace with actual data as needed
+    const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+
+    const handleResetProgressPopup = () => {
+        setIsPopupOpen(false);
+        resetProgress()
+    };
+
+    useEffect(() => {
+        const loadUnlockedLevels = async () => {
+            try {
+                const levels = await fetchUnlockedLevels(userId);
+                setUnlockedLevels(levels);
+            } catch (error) {
+                console.error('Error fetching unlocked levels:', error);
+                // Handle error appropriately, maybe set to default or show user feedback
+            }
+        };
+
+        loadUnlockedLevels();
+    }, [userId]); // Added userId as a dependency
+
+    const handleLevelClick = (level: number): void => {
+        if (level <= unlockedLevels) {
+            console.log(`Level ${level} clicked`);
+            // Navigate to the level or start the game at this level
+        } else {
+            console.log("This level is locked.");
+        }
+    };
+
+    const resetProgress = (): void => {
+        setUnlockedLevels(1); // Reset to only the first level unlocked
+        console.log("Progress has been reset.");
+    };
+
+    return (
+        <div className={`bg-[#1C0043] ${customFont.className}`}>
+            <div className='items-center justify-center flex flex-col h-screen'>
+                <h1 className="absolute top-[16vh] text-white text-4xl">Klik pada level untuk memulai permainan!</h1>
+                <div className='absolute top-6 left-5'>
+                    <div className="ml-3 cursor-pointer transition duration-300"
+                        onMouseEnter={() => setIsHovered2(true)}
+                        onMouseLeave={() => setIsHovered2(false)}
+                        onClick={router.back}
+                    >
+                        <Image
+                            height={20}
+                            width={20}
+                            priority
+                            src={isHovered2 ? BackWhite : Back}
+                            alt="back icon"
+                        />
+                    </div>
+
+                </div>
+
+                <div className="absolute top-6 right-6">
+                    <div className="flex flex-row items-center cursor-pointer"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        onClick={() => setIsPopupOpen(true)}
+                    >
+                        <Image
+                            height={18}
+                            width={18}
+                            priority
+                            src={isHovered ? ResetProgressWhite : ResetProgress}
+                            alt="logout"
+                        />
+                        <div className={`ml-2 text-xl text-[#9177B7] hover:text-white ${isHovered ? 'text-white' : 'text-[#9177B7]'}`}>Reset Progress</div>
+                    </div>
+                </div>
+                <div className="mt-12 grid grid-cols-5 gap-y-12 gap-x-32">
+                    {Array.from({ length: totalLevels }, (_, i) => (
+                        <button
+                            key={i}
+                            className={`w-28 h-28 text-5xl bg-white text-[#9177B7] rounded-md flex items-center justify-center ${i + 1 <= unlockedLevels ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
+                                }`}
+                            onClick={() => handleLevelClick(i + 1)}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <PopupResetProgress
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                onConfirm={handleResetProgressPopup}
+            />
+        </div>
+    );
+};
