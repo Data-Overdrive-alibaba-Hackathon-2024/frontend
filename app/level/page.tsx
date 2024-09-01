@@ -1,6 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import { fetchUnlockedLevels } from './actions';
+import { useState, useEffect } from 'react';
 import { Pixelify_Sans } from 'next/font/google';
 import Image from 'next/image';
 import ResetProgress from '../../public/reset-progress.svg'
@@ -22,8 +21,7 @@ export default function LevelPage() {
     const [isHovered, setIsHovered] = useState(false);
     const [isHovered2, setIsHovered2] = useState(false);
     const totalLevels = 10;
-    const [unlockedLevels, setUnlockedLevels] = useState<number>(1); // Default to 1 until data is fetched
-    const userId = '123'; // Example user ID, replace with actual data as needed
+    const [unlockedLevels, setUnlockedLevels] = useState<number>(1);
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
     const handleResetProgressPopup = () => {
@@ -32,18 +30,30 @@ export default function LevelPage() {
     };
 
     useEffect(() => {
-        const loadUnlockedLevels = async () => {
+        const fetchCurrentLevel = async () => {
             try {
-                const levels = await fetchUnlockedLevels(userId);
-                setUnlockedLevels(levels);
+                const token = localStorage.getItem('token');
+
+                if (!token) {
+                    throw new Error('No token found');
+                }
+
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                const data = await response.json();
+                setUnlockedLevels(data.data.current_level)
+                console.log("current level yang di fetch: ", data.data.current_level)
             } catch (error) {
-                console.error('Error fetching unlocked levels:', error);
-                // Handle error appropriately, maybe set to default or show user feedback
+                console.error('Error fetching quiz question:', error);
             }
         };
 
-        loadUnlockedLevels();
-    }, [userId]); // Added userId as a dependency
+        fetchCurrentLevel();
+    }, []);
 
     const handleLevelClick = (level: number): void => {
         if (level <= unlockedLevels) {

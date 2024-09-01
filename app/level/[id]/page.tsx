@@ -11,8 +11,12 @@ import { StaticImageData } from 'next/image';
 
 type QuizQuestionType = {
     question: string;
-    options: string[];
-    correctAnswer: string;
+    level: number,
+    option_1: string,
+    option_2: string,
+    option_3: string,
+    option_4: string,
+    correct_answer: string;
 };
 
 type DialogueSet = {
@@ -158,11 +162,22 @@ export default function GamePage() {
     // };
 
     useEffect(() => {
-        // Fetch quiz question from API
         const fetchQuizQuestion = async () => {
             try {
-                const response = await fetch('https://your-api-endpoint.com/get-quiz-question');
+                const token = localStorage.getItem('token');
+
+                if (!token) {
+                    throw new Error('No token found');
+                }
+
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/questions?lv=1`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
                 const data = await response.json();
+                console.log("masuk sini, data: ", data)
                 setQuizQuestion(data);
             } catch (error) {
                 console.error('Error fetching quiz question:', error);
@@ -177,8 +192,21 @@ export default function GamePage() {
         setShowQuiz(true);
     };
 
+    const options = [
+        quizQuestion?.option_1,
+        quizQuestion?.option_2,
+        quizQuestion?.option_3,
+        quizQuestion?.option_4,
+    ];
+
     const handleQuizAnswer = (answer: string) => {
-        if (quizQuestion && answer === quizQuestion.correctAnswer) {
+        if (!quizQuestion) {
+            return;
+        }
+
+        const correctOption = quizQuestion[`option_${quizQuestion.correct_answer.toLowerCase()}` as keyof QuizQuestionType];
+
+        if (answer === correctOption) {
             setShowQuiz(false);
             setCurrentDialogueSet('correct');
             setShowDialogue(true);
@@ -201,7 +229,12 @@ export default function GamePage() {
             {showQuiz && quizQuestion && (
                 <QuizQuestion
                     question={quizQuestion.question}
-                    options={quizQuestion.options}
+                    options={[
+                        quizQuestion.option_1,
+                        quizQuestion.option_2,
+                        quizQuestion.option_3,
+                        quizQuestion.option_4,
+                    ]}
                     onAnswer={handleQuizAnswer}
                     characterImage={Nindy}
                     characterName="Nindy"

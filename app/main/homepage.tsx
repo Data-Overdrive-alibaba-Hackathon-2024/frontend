@@ -56,10 +56,10 @@ export default function HomePage() {
                         <p className="text-3xl">Chatbot</p>
                         <p className="text-xl text-[#9177B7]">Tanya AI</p>
                     </Link>
-                    <div className="flex flex-col text-center cursor-pointer">
+                    <Link href="/about" className="flex flex-col text-center cursor-pointer">
                         <p className="text-3xl">About Us</p>
                         <p className="text-xl text-[#9177B7]">Get to know us</p>
-                    </div>
+                    </Link>
                 </div>
                 <Popup
                     isOpen={isPopupOpen}

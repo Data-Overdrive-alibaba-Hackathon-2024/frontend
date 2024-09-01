@@ -8,7 +8,7 @@ type QuizQuestionProps = {
     onAnswer: (answer: string) => void;
     characterImage: StaticImageData;
     characterName: string;
-    characterMessage: string
+    characterMessage: string;
 };
 
 const customFont = Pixelify_Sans({
