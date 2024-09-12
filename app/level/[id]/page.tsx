@@ -7,9 +7,12 @@ import Raka from '../../../public/npc-raka.png'
 import Raka2 from '../../../public/npc-raka2.png'
 import Nindy from '../../../public/npc-nindy.png'
 import Kakak from '../../../public/npc-kakak.png'
+import Juli from '../../../public/npc-alien.png'
 import QuizQuestion from '@/components/new/quiz-message';
 import BgClassroom from '../../../public/backgrounds/bg-narasi-classroom.png'
 import BgNarasiUjan from '../../../public/backgrounds/bg-narasiujan.png'
+import BgSiang from '../../../public/backgrounds/bg-narasisiang.png'
+import BgMinimarket from '../../../public/backgrounds/bg-narasi-minimar.png'
 import { StaticImageData } from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { fetchNextLevel } from './action';
@@ -456,29 +459,423 @@ export default function GamePage() {
             ],
         },
         6: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Aku udah ngantuk, tapi aku mau nanya kamu satu pertanyaan terakhir, Rak.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Anggap kamu sudah lebih dewasa nanti… Ah, umur gak jadi masalah, sih. Kalau ada temanmu yang bilang kalau dia mau coba-coba judi online, atau lebih parahnya sudah kecanduan, apa yang harus kamu lakukan sebagai masyarakat yang teredukasi?",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            correct: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Selalu ingat untuk rangkul teman kamu, Rak. Kadang, orang hilang arah bukan karena tidak tahu, tapi karena ketiadaan support system di sisinya.",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Aku udah beneran ngantuk. Capek banget di tempat kerja tadi. Tapi, aku seneng kamu nanya-nanya malam ini. Kamu juga jangan lupa istirahat, ya. Selamat malam!",
+                    bg: BgNarasiUjan,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Malam, Kak!",
+                    bg: BgNarasiUjan,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Kakak",
+                    image: Kakak,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgNarasiUjan,
+                },
+            ],
         },
         7: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    text: "Akhir pekan terlihat sama seperti biasa. Tepi danau di kawasan pemerintahan daerah dipenuhi keluarga-keluarga duduk bersantai. Sebuah stadion besar berdiri gagah, ramai oleh kelompok remaja berolah raga pagi.",
+                    bg: BgSiang,
+                },
+                {
+                    text: "Kendaraan roda dua hingga roda empat, sama seperti biasa, memenuhi jalan protokol. Daerah tertib berlalu lintas yang tidak pernah beristirahat tak luput dari pedagang kaki lima yang jarang-jarang mengisi bahu jalan.",
+                    bg: BgSiang,
+                },
+                {
+                    text: "Hari itu terlalu indah untuk hanya dilewatkan dengan berselimut diri di kasur yang nyaman.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Permisi, apakah kamu tahu jalan ke minimarket? Atau apalah itu tempat berualan yang ada kasirnya. Saya kurang mengenal daerah ini.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Boleh. Minimarket cukup jauh, mau saya antar? Kebetulan tempat tujuan saya searah.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Wah, kalau bisa, saya akan sangat berterima kasih.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Apakah Kakak sedang berliburan ke sini?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Ya, saya sedang liburan, tapi bukan liburan seperti yang kamu pikirkan... Hum, ternyata seperti ini ya tempat dengan judi online merajalela.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Judi online?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Oh? Saya berbicara ngawur, ya? Hahaha, lupakan.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Tidak, saya ingin mendengar lebih banyak dari Kakak. Saya suka mengobrol.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Hmm, yah, jadi seperti yang barusan saya bilang, tempatmu ini adalah salah satu daerah yang kasus judi online-nya tinggi.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Saya baru tahu itu.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Yeah, kamu tahu… Banyak hal yang tidak diajarkan di sekolah. Saya bisa mengajarkanmu hal-hal semacam itu.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Hal-hal semacam itu, contohnya?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Kamu tahu sistem enkripsi? Situs-situs judi online di luar sana menggunakan sistem enkripsi untuk melindungi data-data penggunanya. Sederhananya, enkripsi akan membuat data-data tersebut menjadi semacam kode yang tidak dapat dibaca oleh orang luar dengan mudah.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Tujuannya adalah jika sewaktu-waktu data itu bocor, orang luar tetap tidak akan tahu apa isinya, kecuali mereka membukanya dengan proses dekripsi yang dapat menguraikan kodenya.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Sekalipun terlindungi oleh enkripsi, menurutmu bagaimana resiko keamanan data pribadi di situs judi online?",
+                    bg: BgSiang,
+                },
+            ],
+            correct: [
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Hahaha, sistem enkripsi memang sepertinya agak rumit dicerna oleh manusia seusiamu. Tapi tidak apa, itu bukan satu-satunya hal yang harus dipelajari.",
+                    bg: BgSiang,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgSiang,
+                }
+            ],
         },
         8: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Kakak berasal dari mana?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Saya berasal dari… tempat yang cukup jauh.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Dari luar pulau?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Saya baru mendarat di sini.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "“Mendarat”? Apakah Kakak baru datang dari luar negeri?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Saya ini datang dari luar angkasa.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "…Hah? Apakah Kakak… alien?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Ya dan tidak. Hahaha, saya tidak pandai berbasa-basi. Lagipula, kamu tampak seperti orang yang santai ketika bercakap-cakap. Sensor manusia saya mengatakan kamu adalah orang yang tepat, jadi saya memutuskan untuk mendekatimu.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Saya tidak paham. Bagaimana bisa saya adalah orang yang tepat?",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Saya datang ke sini untuk mencari tahu akar dari permasalahan yang sedang sangat ramai terjadi. Ini adalah misi dari planet tempat saya berasal. Bisa dibilang, ini misi “kemanusiaan”.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Saya di sini untuk membantu kaummu menangani “judi online”.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Menurut saya, itu hal yang cukup mulia. Saya pun mengetahui tentang judi online hanya baru-baru ini.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Apakah kamu tahu bagaimana kemungkinan judi online memanfaatkan data-datamu?",
+                    bg: BgSiang,
+                },
+
+            ],
+            correct: [
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Data-data yang disimpan oleh situs-situs judi online dapat dipergunakan untuk melakukan personalisasi iklan maupun pengambilan keputusan untuk menarik pemain di masa yang akan datang. ",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Selain itu, sejak dulu keamanan data selalu jadi perhatian karena ternyata data kita sangat mudah diperjualbelikan, apalagi oleh pihak-pihak yang tidak memiliki izin usaha yang legal.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Kakak terlihat tahu banyak tentang judi online.",
+                    bg: BgSiang,
+                },
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Tempat saya dulu mengalami hal serupa. Namun, kami berhasil bangkit dari keterpurukan. Oh! Kita terlalu asyik mengobrol sampai lupa berkenalan. Hai, nama saya Juli.",
+                    bg: BgSiang,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "???",
+                    image: Juli,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgSiang,
+                }
+            ],
         },
         9: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Kita sudah sampai di minimarket.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Ah, ini dia. Tenggorokan saya kering setelah berjalan cukup jauh. Apakah ada yang kamu mau? Saya yang traktir.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Saya mau jus jeruk!",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Hahaha, okee. Omong-omong, Raka, apakah kamu tahu bagaimana seseorang melakukan transaksi dalam permainan judi online?",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Hmm, saya rasa belum?",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Setelah melakukan deposit atau menaruh jumlah uang di akun mereka, pemain dapat memasang taruhan dan menarik uangnya apabila memenangkan taruhan. Terdengar biasa saja, ya? Untuk memahaminya, saya akan bertanya satu pertanyaan tambahan.",
+                    bg: BgMinimarket,
+                },
+            ],
+            correct: [
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Yang berbahaya adalah transaksi pada judi online terjadi di wilayah abu-abu hukum atau bahkan ilegal di beberapa negara. Artinya, mereka yang bertransaksi tidak mendapat perlindungan hukum.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Dan orang-orang pintar jelas akan lebih memilih bertransaksi dengan aman. Seperti ketika saya membayar jus jerukmu ini.",
+                    bg: BgMinimarket,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgMinimarket,
+                },
+            ],
         },
         10: {
-            initial: [/* Array of dialogue objects for level 2 */],
-            correct: [/* Array of correct dialogue objects for level 2 */],
-            tryAgain: [/* Array of try-again dialogue objects for level 2 */],
+            initial: [
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Juli, kalau judi online memang sudah memiliki dasar hukum, kerugiannya pun banyak dan sudah jelas, mengapa masih belum berhasil diberantas?",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Hahaha, saya senang kamu bertanya seperti itu! Untuk menjawabnya, saya akan memberikan beberapa teori. Silakan kamu tebak.",
+                    bg: BgMinimarket,
+                },
+            ],
+            correct: [
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "...",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Hei, kenapa kamu hanya diam?",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Saya hanya… Bagaimana cara planetmu bersih dari judi online? Saya yakin warga di sana pasti sudah hidup dengan tenteram.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Hahaha, saya belum bisa memberitahumu karena ini termasuk rahasia planet nomor 3108.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Raka, sekalipun judi online hilang dari planetmu, saya yakin umat manusia akan menghadapi masalah-masalah lainnya. Tindak kriminal, kebohongan publik, dan semacamnya… Kedamaian adalah sebuah utopia yang tidak dapat dicapai secara mutlak oleh bangsa manapun.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Tetap saja, saya rasa, daerah ini beruntung memiliki orang sepertimu.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Raka",
+                    image: Raka2,
+                    text: "Kata-katamu seperti kata-kata perpisahan.",
+                    bg: BgMinimarket,
+                },
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Hahaha! Sayangnya, ini memang perpisahan. Saya harus melanjutkan misi saya secara mandiri. Akan tetapi, saya yakin kita akan bertemu lagi suatu hari nanti. Senang bertemu denganmu!",
+                    bg: BgMinimarket,
+                },
+            ],
+            tryAgain: [
+                {
+                    name: "Juli",
+                    image: Juli,
+                    text: "Kurang tepat, coba lagi",
+                    bg: BgMinimarket,
+                },
+            ],
         },
     };
 
